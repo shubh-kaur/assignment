@@ -1,0 +1,60 @@
+<!-- views/addSet.ejs -->
+
+<head>
+  <title>Lego collections</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+  <div class="navbar bg-base-100">
+  <%- include('partials/navbar', { page: '/lego/addSet' }) %>
+</div>
+
+  <div class="container mt-4">
+    <h2>Add Set</h2>
+    <!--  -->
+    <div class="hero bg-base-200 p-6">
+      <div class="hero-content text-center ">
+        <div class="max-w-md">
+    <!--  -->
+    <form action="/lego/addSet" method="POST">
+      <div class="mb-3 inline">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="mb-3 inline">
+        <label for="year" class="form-label">Year</label>
+        <input type="number" class="form-control" id="year" name="year" required>
+      </div>
+      <div class="mb-3">
+        <label for="num_parts" class="form-label">Number of Parts</label>
+        <input type="number" class="form-control" id="num_parts" name="num_parts" required>
+      </div>
+      <div class="mb-3">
+        <label for="img_url" class="form-label">Image URL</label>
+        <input type="url" class="form-control" id="img_url" name="img_url" required>
+      </div>
+      <div class="mb-3">
+        <label for="theme_id" class="form-label">Theme</label>
+        <select class="form-select" id="theme_id" name="theme_id" required>
+          <% themes.forEach(theme => { %>
+            <option value="<%= theme.id %>"><%= theme.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="set_num" class="form-label">Set Number</label>
+        <input type="text" class="form-control" id="set_num" name="set_num" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!--  -->
+        </div>
+        </div>
+        </div>
+    <!--  -->
+  </div>
+
+</body>

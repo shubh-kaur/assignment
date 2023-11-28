@@ -1,0 +1,75 @@
+
+<style>
+    img {
+      width: 100%;
+    }
+    .image-cell {
+      width: 10%;height: 100%;
+    }
+</style>
+<head>
+    <title>Lego collections</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  
+  <body>
+    
+    <div class="navbar bg-base-100">
+      <%- include('partials/navbar') %>
+    </div>
+  
+    <!--  -->
+    
+    <div class="container ">
+  
+  
+        <div class="hero bg-base-200 p-6">
+            <div class="hero-content text-center ">
+            <div class="max-w-md">
+                <h1 class="text-5xl font-bold">Collection</h1>
+                <p class="py-6">Browse the entire collection.  Click the theme to filter by themes such as: 
+                    <a href="/lego/sets?theme=Technic" class="btn btn-primary btn-xs">Technic</a> 
+                    <a href="/lego/sets?theme=Classic Town" class="btn btn-primary btn-xs">Classic Town</a>  
+                    <a href="/lego/sets?theme=Supplemental" class="btn btn-primary btn-xs">Supplemental</a> </p>
+            </div>
+            </div>
+        </div>
+  
+      <br>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Theme</th>
+            <th>Year</th>
+            <th>Num Parts</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% sets.forEach(set => { %>
+            <tr>
+              <td class="image-cell"><img src="<%= set.img_url %>" alt="<%= set.name %>"></td>
+              <td><%= set.name %></td>
+              <td><a href="/lego/sets?theme=<%= set.Theme.name %>" class="btn btn-theme"><%= set.Theme.name %></a></td>
+              <td><%= set.year %></td>
+              <td><%= set.num_parts %></td>
+              <td><a href="/lego/sets/<%= set.set_num %>" class="btn btn-details">Details</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+
+  
+      
+  
+  
+    </div>
+    <!--  -->
+  </body>
+  
+  

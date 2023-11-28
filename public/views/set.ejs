@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" />
+    <title><%= set.name %> Details</title>
+</head>
+
+<body>
+    <div class="navbar bg-base-100">
+        <%- include('partials/navbar') %>
+    </div>
+
+    <div class="container">
+        <div class="hero bg-base-200 p-6">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold"><%= set.name %> Details</h1>
+                    <p>Below you will find information about <%= set.name %> </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <div class="image-container">
+                <img src="<%= set.img_url %>" alt="<%= set.name %>">
+            </div>
+            <div class="prose">
+                <h1><%= set.name %> Details</h1>
+                <p>
+                    <span class="font-bold">Set Name: </span><%= set.name %> <br>
+                    <span class="font-bold">Year Released: </span><%= set.year %> <br>
+                    <span class="font-bold">Theme: </span><%= set.theme %> <br>
+                    <span class="font-bold">Number of Parts: </span><%= set.num_parts %> <br><br>
+
+                    <span id="quote">Loading quote...</span>
+                    <br><br>
+                    <!-- Edit link to direct users to the edit page -->
+                    <a class="btn btn-success btn-sm" href="/lego/editSet/<%= set.set_num %>">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>
+                </p>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                fetch("https://quotable.io/random")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("quote").innerHTML = `"${data.content}"<br>- <em>${data.author}</em>`;
+                    });
+            });
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!-- editSet.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Set</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+  <div class="navbar bg-base-100">
+    <%- include('partials/navbar', { page: '' }) %>
+  </div>
+
+  <div class="container">
+    <div class="hero bg-base-200 p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">Edit Set <%= set.name %></h1>
+          <p>Edit the details of <%= set.name %> below:</p>
+        </div>
+      </div>
+    </div>
+
+    <form action="/lego/editSet" method="post">
+      <input type="hidden" name="set_num" value="<%= set.set_num %>">
+
+      <div class="grid grid-cols-2 gap-6 mt-4">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Set Name</span>
+          </label>
+          <input type="text" name="name" value="<%= set.name %>" class="input" required>
+        </div>
+
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Year Released</span>
+          </label>
+          <input type="number" name="year" value="<%= set.year %>" class="input" required>
+        </div>
+
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Theme</span>
+          </label>
+          <select name="theme_id" class="select" required>
+            <% themes.forEach(theme => { %>
+              <option <%= (set.theme_id == theme.id) ? "selected" : "" %> value="<%= theme.id %>">
+                <%= theme.name %>
+              </option>
+            <% }); %>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Number of Parts</span>
+          </label>
+          <input type="number" name="num_parts" value="<%= set.num_parts %>" class="input" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-4">Update Set</button>
+    </form>
+
+    <button class="btn btn-error mt-4" onclick="confirmDelete('<%= set.set_num %>')">Delete Set</button>
+  </div>
+
+  <script>
+    function confirmDelete(setNum) {
+      if (confirm('Are you sure you want to delete this set?')) {
+        window.location.href = '/lego/deleteSet/' + setNum;
+      }
+    }
+  </script>
+</body>
+</html>
